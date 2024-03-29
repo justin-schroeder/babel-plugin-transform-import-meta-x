@@ -1,49 +1,5 @@
-# babel-plugin-transform-import-meta
+# babel-plugin-transform-import-meta-x
 
-Transforms import.meta for nodejs environments. This plugin replaces any occurrence of `import.meta.url`.
+This is a Babel plugin that transforms `import.meta` subproperty access to any other literal value.
 
-```js
-console.log(import.meta.url);
-```
-
-With this
-
-```js
-console.log(require('url').pathToFileURL(__filename).toString());
-```
-
-## Installation
-
-Install this package
-
-```javascript
-npm install --save-dev babel-plugin-transform-import-meta
-```
-
-And configure it
-
-```json
-{
-  "plugins": [
-    "babel-plugin-transform-import-meta"
-  ]
-}
-```
-
-# Settings
-
-## ES6 modules
-
-It's possible to use ES6 modules for the output. Useful to delegate module transformation to other plugins.
-
-```json
-{
-  "plugins": [
-    ["babel-plugin-transform-import-meta", { "module": "ES6" }]
-  ]
-}
-```
-
-## Credits
-
-Based on a previous project "babel-plugin-import-meta" by The Polymer Authors
+This module is derived from the [babel-plugin-transform-import-meta](https://github.com/javiertury/babel-plugin-transform-import-meta) project.
