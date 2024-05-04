@@ -78,5 +78,21 @@ describe('babel-plugin-import-meta-x', () => {
       })?.code ?? '';
       expect(result.trim()).toEqual(expected.trim());
     });
+
+    test('transforms import.meta.dev to a boolean', () => {
+      const pluginOptions: PluginOptions | undefined = { replacements: { dev: false } };
+      const input = dedent(`
+        console.log(import.meta.dev);
+      `);
+
+      const expected = dedent(`
+        console.log(false);
+      `);
+      const result = babelCore.transform(input, {
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        plugins: [pluginOptions ? [importMetaPlugin, pluginOptions] : importMetaPlugin]
+      })?.code ?? '';
+      expect(result.trim()).toEqual(expected.trim());
+    });
   });
 });
