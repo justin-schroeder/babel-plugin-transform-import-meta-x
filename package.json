@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-import-meta-x",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Transforms import.meta[x] subproperties",
   "repository": {
     "type": "git",
