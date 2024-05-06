@@ -2,8 +2,10 @@ import { smart } from '@babel/template';
 import type { PluginObj, NodePath } from '@babel/core';
 import type { Statement, MemberExpression } from '@babel/types';
 
+type Replacement = string | boolean;
+
 export interface PluginOptions {
-  replacements: Record<string, string>
+  replacements: Record<string, Replacement>
 }
 
 /**
@@ -54,8 +56,12 @@ export default function (): PluginObj {
         }
 
         for (const [node, replacement] of metas) {
-          const metaReplacement = smart.ast`${replacement}` as Statement;
-          node.replaceWith(metaReplacement);
+          if (typeof replacement === 'boolean') {
+            node.replaceWithSourceString(replacement);
+          } else {
+            const metaReplacement = smart.ast`${replacement}` as Statement;
+            node.replaceWith(metaReplacement);
+          }
         }
       }
     }
